@@ -17,6 +17,8 @@ header {
     align-items: center;
     justify-content: space-between;
     padding: 20px 10%;
+    background-color: white;
+    height: 60px;
 }
 .logo img {
     max-width: 130px;
@@ -70,4 +72,14 @@ header {
 .para {
     text-align: center;
 
+}
+.main-home {
+    height: 1000px;
+    width: 1000px;
+    background-image: url(Frame\ 9.png);
+    background-position: center;
+    background-size: cover;
+}
+.hero {
+    width: 100%;
 }

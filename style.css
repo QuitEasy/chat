@@ -19,6 +19,7 @@ header {
     padding: 20px 10%;
     background-color: white;
     height: 60px;
+    border-width: 0.5px;
 }
 .logo img {
     max-width: 130px;
@@ -82,4 +83,18 @@ header {
 }
 .hero {
     width: 100%;
+}
+.opt {
+    text-align: center;
+}
+.lng-btn {
+    display: block;
+    margin: auto;
+    height: 50px;
+    width: 160px;
+    border-radius: 50px;
+    border: none;
+    color: white;
+    background: linear-gradient(to right, #FFEF3D, #FF4043);
+    font-size: x-large;
 }

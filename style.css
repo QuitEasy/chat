@@ -97,4 +97,5 @@ header {
     color: white;
     background: linear-gradient(to right, #FFEF3D, #FF4043);
     font-size: x-large;
+    cursor: pointer;
 }

@@ -1,0 +1,8 @@
+{
+    "name": "quiteasy/smoking-cessation-ai",
+    "description": "AI-powered smoking cessation support platform",
+    "require": {
+        "php": ">=7.4",
+        "vlucas/phpdotenv": "^5.5"
+    }
+}

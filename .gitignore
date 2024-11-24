@@ -1,0 +1,5 @@
+config.js
+.env
+vendor/
+node_modules/
+*.log

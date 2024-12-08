@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coming Soon - QuitEasy</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="construction-page">
+        <div class="construction-content">
+            <div class="robot-container">
+                <div class="robot">
+                    <div class="robot-head">
+                        <div class="eyes">
+                            <div class="eye"></div>
+                            <div class="eye"></div>
+                        </div>
+                        <div class="antenna"></div>
+                    </div>
+                    <div class="robot-body">
+                        <div class="panel"></div>
+                    </div>
+                </div>
+                <div class="shadow"></div>
+            </div>
+            <div class="message-container">
+                <h1>Hey there! 👋</h1>
+                <div class="typing-text">
+                    <p>I'm still learning and getting smarter...</p>
+                    <p>But I promise I'll be worth the wait! 🚀</p>
+                </div>
+                <div class="fun-facts">
+                    <h3>While you wait, did you know?</h3>
+                    <div class="fact">
+                        <i class="fas fa-brain"></i>
+                        <p>Your brain starts recovering just 24 hours after quitting smoking!</p>
+                    </div>
+                    <div class="fact">
+                        <i class="fas fa-heart"></i>
+                        <p>In just 2 weeks, your circulation improves significantly!</p>
+                    </div>
+                </div>
+            </div>
+            <div class="action-buttons">
+                <a href="javascript:history.back()" class="back-btn">
+                    <i class="fas fa-arrow-left"></i> Go Back
+                </a>
+                <button class="refresh-fact-btn">
+                    <i class="fas fa-sync-alt"></i> New Fact
+                </button>
+            </div>
+        </div>
+        <div class="particles"></div>
+    </div>
+    <script>
+        // Typing animation with smoother transitions
+        const messages = [
+            "I'm still learning and getting smarter...",
+            "Training my neural networks...",
+            "Learning about wellness...",
+            "Mastering motivation techniques...",
+            "Almost ready to help you quit smoking!"
+        ];
+        let currentMessage = 0;
+        const typingText = document.querySelector('.typing-text p');
+
+        function typeMessage() {
+            typingText.style.opacity = '0';
+            typingText.style.transform = 'translateY(10px)';
+            setTimeout(() => {
+                typingText.textContent = messages[currentMessage];
+                typingText.style.opacity = '1';
+                typingText.style.transform = 'translateY(0)';
+                currentMessage = (currentMessage + 1) % messages.length;
+            }, 300);
+        }
+
+        setInterval(typeMessage, 4000);
+
+        // Enhanced robot animation
+        const robot = document.querySelector('.robot');
+        const eyes = document.querySelectorAll('.eye');
+        let isWaving = false;
+
+        document.addEventListener('mousemove', (e) => {
+            if (!isWaving) {
+                const mouseX = e.clientX;
+                const mouseY = e.clientY;
+                
+                eyes.forEach(eye => {
+                    const rect = eye.getBoundingClientRect();
+                    const eyeX = rect.left + rect.width / 2;
+                    const eyeY = rect.top + rect.height / 2;
+                    
+                    const angle = Math.atan2(mouseY - eyeY, mouseX - eyeX);
+                    const eyeMove = 2;
+                    
+                    const moveX = Math.cos(angle) * eyeMove;
+                    const moveY = Math.sin(angle) * eyeMove;
+                    
+                    eye.style.transform = `translate(${moveX}px, ${moveY}px)`;
+                });
+            }
+        });
+
+        // Improved particle system
+        function createParticle() {
+            const particles = document.querySelector('.particles');
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            
+            const size = Math.random() * (window.innerWidth < 768 ? 5 : 10) + 3;
+            const posX = Math.random() * window.innerWidth;
+            const duration = Math.random() * 2 + 2;
+            
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+            particle.style.left = `${posX}px`;
+            particle.style.animationDuration = `${duration}s`;
+            
+            particles.appendChild(particle);
+            
+            setTimeout(() => {
+                particles.removeChild(particle);
+            }, duration * 1000);
+        }
+
+        const particleInterval = window.innerWidth < 768 ? 300 : 200;
+        setInterval(createParticle, particleInterval);
+
+        // Enhanced facts system with smooth transitions
+        const facts = [
+            "Your sense of taste improves within 48 hours of quitting!",
+            "After 72 hours, breathing becomes noticeably easier!",
+            "Within 1 month, your lung function increases by up to 30%!",
+            "After 1 year, your risk of heart disease drops by 50%!",
+            "In 5 years, your stroke risk is reduced to that of a non-smoker!",
+            "Your body has amazing healing powers - give it a chance!",
+            "Every day without smoking is a victory for your health!",
+            "You're stronger than you think - you've got this!",
+            "Your skin will look younger within weeks of quitting!",
+            "You'll save money and improve your health at the same time!"
+        ];
+
+        const factContainer = document.querySelector('.fact');
+        const factText = document.querySelector('.fact p');
+        const refreshBtn = document.querySelector('.refresh-fact-btn');
+        let isAnimating = false;
+
+        function showNewFact() {
+            if (isAnimating) return;
+            isAnimating = true;
+
+            const currentFact = factText.textContent;
+            let newFact;
+            do {
+                newFact = facts[Math.floor(Math.random() * facts.length)];
+            } while (newFact === currentFact);
+            
+            factContainer.style.transform = 'translateX(-10px)';
+            factContainer.style.opacity = '0';
+            
+            setTimeout(() => {
+                factText.textContent = newFact;
+                factContainer.style.transform = 'translateX(0)';
+                factContainer.style.opacity = '1';
+                isAnimating = false;
+            }, 300);
+        }
+
+        refreshBtn.addEventListener('click', showNewFact);
+
+        // Add touch interaction for mobile
+        let touchStartY = 0;
+        document.addEventListener('touchstart', (e) => {
+            touchStartY = e.touches[0].clientY;
+        });
+
+        document.addEventListener('touchmove', (e) => {
+            const touchY = e.touches[0].clientY;
+            const diff = touchStartY - touchY;
+            
+            if (Math.abs(diff) > 50) {
+                showNewFact();
+                touchStartY = touchY;
+            }
+        });
+
+        // Prevent zoom on double tap
+        document.addEventListener('dblclick', (e) => {
+            e.preventDefault();
+        });
+    </script>
+</body>
+</html>
